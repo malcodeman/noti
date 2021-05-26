@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eaecef"
     tools:context=".TodoDetails">
 
     <EditText
@@ -15,6 +16,7 @@
         android:layout_marginEnd="16dp"
         android:autofillHints="@string/title"
         android:ems="10"
+        android:hint="@string/title"
         android:inputType="textPersonName"
         android:labelFor="@id/saveBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,12 +32,12 @@
         android:layout_marginEnd="16dp"
         android:autofillHints="@string/description"
         android:ems="10"
+        android:hint="@string/description"
         android:inputType="textPersonName"
         android:labelFor="@id/saveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleInput"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/titleInput" />
 
     <Button
         android:id="@+id/saveBtn"
@@ -43,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#2ea44f"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -53,7 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#fafbfc"
         android:text="@string/cancel"
+        android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

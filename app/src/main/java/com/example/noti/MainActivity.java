@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton addTodoBtn = findViewById(R.id.addTodoBtn);
         addTodoBtn.setOnClickListener(this::onAddTodoHandler);
         initializeListAdapter();
-        ListView listView  = findViewById(R.id.todosList);
+        ListView listView = findViewById(R.id.todosList);
         listView.setOnItemClickListener(this::listItemOnClickHandler);
     }
 
@@ -43,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private void initializeListAdapter() {
         List<Todo> todos = AppDatabase.getDbInstance(getApplicationContext()).todoDao().getAllTodos();
         TodoListAdapter adapter = new TodoListAdapter(this, todos);
-        ListView listView  = findViewById(R.id.todosList);
+        ListView listView = findViewById(R.id.todosList);
         listView.setAdapter(adapter);
+        if(todos.size() == 0){
+            TextView emptyState = findViewById(R.id.emptyState);
+            emptyState.setVisibility(View.VISIBLE);
+        }
     }
 }
