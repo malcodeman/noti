@@ -16,6 +16,12 @@ public interface TodoDao {
     @Insert
     void insertTodos(Todo... todos);
 
-    @Delete
-    void deleteTodo(Todo todo);
+    @Query("DELETE FROM todo WHERE uid = :uid")
+    void deleteTodo(int uid);
+
+    @Query("SELECT * FROM todo WHERE uid = :uid LIMIT 1")
+    Todo getTodoById(int uid);
+
+    @Query("UPDATE todo SET title = :title, description = :description WHERE uid = :uid")
+    void update(String title, String description, int uid);
 }

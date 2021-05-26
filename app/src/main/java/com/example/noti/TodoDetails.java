@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,35 @@ public class TodoDetails extends AppCompatActivity {
 
         cancelBtn.setOnClickListener(this::onCancelHandler);
         saveBtn.setOnClickListener(this::onSaveHandler);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            long uid = extras.getLong(MainActivity.TODO_ID);
+            Todo todo = AppDatabase.getDbInstance(this).todoDao().getTodoById((int) uid);
+            EditText titleInput = findViewById(R.id.titleInput);
+            EditText descriptionInput = findViewById(R.id.descriptionInput);
+            titleInput.setText(todo.getTitle());
+            descriptionInput.setText(todo.getDescription());
+            cancelBtn.setText("Delete");
+            saveBtn.setText("Update");
+            cancelBtn.setOnClickListener(v -> onDeleteHandler(v, uid));
+            saveBtn.setOnClickListener(v -> onUpdateHandler(v, titleInput.getText().toString(), descriptionInput.getText().toString(), uid));
+        }
+    }
+
+    private  void goToMain(){
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+    }
+
+    private void onDeleteHandler(View v, long uid) {
+        AppDatabase.getDbInstance(this).todoDao().deleteTodo((int) uid);
+        goToMain();
+    }
+
+    private void onUpdateHandler(View v, String title, String description, long uid) {
+        AppDatabase.getDbInstance(this).todoDao().update(title, description, (int) uid);
+        goToMain();
     }
 
     private void onCancelHandler(View v) {
@@ -43,8 +73,7 @@ public class TodoDetails extends AppCompatActivity {
         } else {
             Todo newTodo = new Todo(title.getText().toString(), description.getText().toString());
             db.todoDao().insertTodos(newTodo);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            goToMain();
         }
     }
 }
