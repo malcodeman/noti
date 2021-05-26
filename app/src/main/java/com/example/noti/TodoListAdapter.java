@@ -10,8 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class TodoListAdapter extends BaseAdapter {
-    private Context context;
-    private List<Todo> todoList;
+    private final Context context;
+    private final List<Todo> todoList;
 
     public TodoListAdapter(Context context, List<Todo> todoList) {
         this.context = context;

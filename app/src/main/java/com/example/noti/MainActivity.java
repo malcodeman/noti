@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         TodoListAdapter adapter = new TodoListAdapter(this, todos);
         ListView listView = findViewById(R.id.todosList);
         listView.setAdapter(adapter);
-        if(todos.size() == 0){
+        if (todos.size() == 0) {
             TextView emptyState = findViewById(R.id.emptyState);
             emptyState.setVisibility(View.VISIBLE);
         }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,10 +30,10 @@ public class TodoDetails extends AppCompatActivity {
             EditText descriptionInput = findViewById(R.id.descriptionInput);
             titleInput.setText(todo.getTitle());
             descriptionInput.setText(todo.getDescription());
-            cancelBtn.setText("Delete");
-            saveBtn.setText("Update");
-            cancelBtn.setOnClickListener(v -> onDeleteHandler(v, uid));
-            saveBtn.setOnClickListener(v -> onUpdateHandler(v, titleInput.getText().toString(), descriptionInput.getText().toString(), uid));
+            cancelBtn.setText(R.string.delete);
+            saveBtn.setText(R.string.update);
+            cancelBtn.setOnClickListener(v -> onDeleteHandler(uid));
+            saveBtn.setOnClickListener(v -> onUpdateHandler(titleInput.getText().toString(), descriptionInput.getText().toString(), uid));
         }
     }
 
@@ -43,12 +42,12 @@ public class TodoDetails extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void onDeleteHandler(View v, long uid) {
+    private void onDeleteHandler(long uid) {
         AppDatabase.getDbInstance(this).todoDao().deleteTodo((int) uid);
         goToMain();
     }
 
-    private void onUpdateHandler(View v, String title, String description, long uid) {
+    private void onUpdateHandler(String title, String description, long uid) {
         AppDatabase.getDbInstance(this).todoDao().update(title, description, (int) uid);
         goToMain();
     }
