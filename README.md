@@ -1,2 +1,5 @@
 # noti
-Simple android todo app
+
+Simple android todo app.
+
+![Screenshot](screenshots/main.png)
