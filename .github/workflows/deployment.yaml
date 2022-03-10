@@ -20,6 +20,9 @@ jobs:
       - name: Install Expo CLI
         run: npm install -g expo-cli
 
+      - name: Install Expo updates
+        run: npm install -g expo-updates
+
       - name: Deploy to Expo
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
