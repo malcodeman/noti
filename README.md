@@ -1,5 +1,18 @@
-# noti
+# [noti](https://expo.dev/@malcodeman/noti)
 
-Simple android todo app.
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/malcodeman/noti/master/LICENSE)
 
-![Screenshot](screenshots/main.png)
+Simple react native todo app.
+
+## Getting started
+
+```
+git clone https://github.com/malcodeman/noti.git
+cd noti
+npm install
+npm start
+```
+
+## License
+
+[MIT](./LICENSE)
