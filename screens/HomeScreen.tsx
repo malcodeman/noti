@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { map } from "ramda";
 
@@ -9,12 +9,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 48,
     paddingBottom: 16,
-  },
-  flex: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    flexGrow: 1,
   },
   heading: {
     fontSize: 32,
@@ -35,6 +30,7 @@ type Task = {
 
 function HomeScreen() {
   const [tasks, setTasks] = React.useState<Task[]>([]);
+  const scrollView = React.useRef<ScrollView>(null);
 
   function handleOnPress(data: { value: string }) {
     if (data.value) {
@@ -46,25 +42,28 @@ function HomeScreen() {
     }
   }
 
+  function handleOnContentSizeChange() {
+    scrollView.current?.scrollToEnd({ animated: true });
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.flex}>
-        <View>
-          <Text style={styles.heading}>My tasks</Text>
-          <View>
-            {map(
-              (item) => (
-                <Text key={item.id} style={styles.task}>
-                  {item.value}
-                </Text>
-              ),
-              tasks
-            )}
-          </View>
-        </View>
-        <NewTask onSubmit={handleOnPress} />
-      </View>
+      <Text style={styles.heading}>My tasks</Text>
+      <ScrollView
+        ref={scrollView}
+        onContentSizeChange={handleOnContentSizeChange}
+      >
+        {map(
+          (item) => (
+            <Text key={item.id} style={styles.task}>
+              {item.value}
+            </Text>
+          ),
+          tasks
+        )}
+      </ScrollView>
+      <NewTask onSubmit={handleOnPress} />
     </View>
   );
 }

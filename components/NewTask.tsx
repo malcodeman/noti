@@ -6,7 +6,9 @@ import Button from "../system/Button";
 
 const styles = StyleSheet.create({
   wrapper: {
+    paddingTop: 16,
     paddingHorizontal: 16,
+    marginTop: "auto",
   },
   input: {
     marginBottom: 16,
@@ -40,6 +42,7 @@ function NewTask(props: Props) {
         value={value}
         style={styles.input}
         ref={inputEl}
+        numberOfLines={2}
       />
       <Button onPress={handleOnPress}>Add new task</Button>
     </View>
