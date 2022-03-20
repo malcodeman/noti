@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
+    textAlign: "center",
+    fontSize: 16,
   },
 });
 

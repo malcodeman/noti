@@ -1,17 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { map } from "ramda";
 
-import Button from "../components/Button";
+import NewTask from "../components/NewTask";
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 48,
+    paddingBottom: 16,
+  },
+  flex: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  heading: {
+    fontSize: 32,
+    paddingHorizontal: 16,
+  },
+  task: {
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0,0.1)",
     padding: 16,
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 
@@ -21,35 +34,37 @@ type Task = {
 };
 
 function HomeScreen() {
-  const [value, setValue] = React.useState("");
   const [tasks, setTasks] = React.useState<Task[]>([]);
 
-  function handleOnPress() {
-    if (value) {
+  function handleOnPress(data: { value: string }) {
+    if (data.value) {
       const newTask = {
         id: Math.random(),
-        value,
+        value: data.value,
       };
       setTasks((prev) => [...prev, newTask]);
-      setValue("");
     }
   }
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {map(
-        (item) => (
-          <Text key={item.id}>{item.value}</Text>
-        ),
-        tasks
-      )}
-      <TextInput
-        placeholder="New task"
-        onChangeText={(value) => setValue(value)}
-        value={value}
-      />
-      <Button onPress={handleOnPress}>Add a new task</Button>
+      <View style={styles.flex}>
+        <View>
+          <Text style={styles.heading}>My tasks</Text>
+          <View>
+            {map(
+              (item) => (
+                <Text key={item.id} style={styles.task}>
+                  {item.value}
+                </Text>
+              ),
+              tasks
+            )}
+          </View>
+        </View>
+        <NewTask onSubmit={handleOnPress} />
+      </View>
     </View>
   );
 }

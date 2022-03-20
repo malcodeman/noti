@@ -26,6 +26,8 @@ exports[`Button snapshot 1`] = `
     style={
       Object {
         "color": "#fff",
+        "fontSize": 16,
+        "textAlign": "center",
       }
     }
   >
