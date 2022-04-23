@@ -4,6 +4,8 @@
 
 Simple react native todo app.
 
+![Screenshot](readme/screenshot.jpg)
+
 ## Getting started
 
 ```
